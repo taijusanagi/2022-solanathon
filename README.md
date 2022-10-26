@@ -1,32 +1,29 @@
-## Solana frontend started kit
+## RAKUGAKI
 
-This template has everything you need to build a web3 app on Solana using the thirdweb SDK.
+### Description
 
-## Getting Started
+With Rakugaki, you can create stunning images and mint them as non-fungible tokens (NFTs) on the Solana blockchain. Powered by stable diffusion and the Thirdweb Solana SDK, Rakugaki is the perfect tool for anyone looking to create and certify AI-generated images. Simply input the text, and Rakugaki will generate an image from it. You can then mint your NFTs on the Solana blockchain without needing a third-party service. So what are you waiting for? Try Rakugaki today and see how easy and fun it is to create beautiful things with AI!
 
-Create a project using this example:
+### Deployed Service
 
-```bash
-npx thirdweb create --template next-typescript-solana-starter
-```
+TBD
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+### Demo Video
 
-On `pages/_app.tsx`, you'll find our `ThirdwebProvider` wrapping your app, this is necessary for our hooks to work.
+TBD
 
-on `pages/index.tsx`, you'll find an example of a connect wallet button and some hooks.
+### How it works
 
-## Learn More
+![how-it-works](./docs/how-it-works.png)
 
-To learn more about thirdweb and Next.js, take a look at the following resources:
+1. Access Solana with ThirdWeb SDK
+2. Input prompt
+3. [Backend] Generate Image by Stable Diffusion and sign by admin key
+4. Preview image
+5. This signature is to request the admin to mint the NFT
+6. [Backend] Verify admin and user signature and mint NFT on Solana blockchain
+7. NFT is minted and reflected in ThirdWeb Dashboard
 
-- [thirdweb React Documentation](https://docs.thirdweb.com/react) - learn about our React SDK.
-- [thirdweb TypeScript Documentation](https://docs.thirdweb.com/typescript) - learn about our JavaScript/TypeScript SDK.
-- [thirdweb Portal](https://docs.thirdweb.com) - check our guides and development resources.
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+### ThirdWeb Dashboard
 
-You can check out [the thirdweb GitHub organization](https://github.com/thirdweb-dev) - your feedback and contributions are welcome!
-
-## Join our Discord!
-
-For any questions, suggestions, join our discord at [https://discord.gg/thirdweb](https://discord.gg/thirdweb).
+https://thirdweb.com/sol-devnet/A4bDc7ZLrWUXHKjF2hVg2Zp9zmfeay3k2UF2u7Wdm6Ch/
