@@ -5,8 +5,6 @@ import { clearInterval } from "timers";
 
 import { getPromtToImageMessage } from "../../lib/utils";
 
-const apiKey = "3dd9ce614395cd3322afa6b2908b529e2ed3f2a4";
-
 export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { prompt } = req.body;
 
@@ -15,8 +13,13 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     throw new Error("Private key invalid");
   }
 
+  if (!process.env.API_KEY) {
+    throw new Error("API key invalid");
+  }
+
   console.log("initialize sdk...");
   const privateKey = process.env.PRIVATE_KEY;
+  const apiKey = process.env.API_KEY;
   const sdk = ThirdwebSDK.fromPrivateKey("devnet", privateKey);
 
   const { data } = await axios.post(

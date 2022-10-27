@@ -15,10 +15,10 @@ import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { useSDK } from "@thirdweb-dev/react/solana";
 import axios from "axios";
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Modal } from "../components/Modal";
-import { getMintMessage } from "../lib/utils";
+import { getMintMessage, sleep } from "../lib/utils";
 
 require("@solana/wallet-adapter-react-ui/styles.css");
 
@@ -27,6 +27,7 @@ const Home: NextPage = () => {
   const { onOpen, onClose, isOpen } = useDisclosure();
 
   // states
+  const [isInitializing, setIsInitializing] = useState(true);
   const [mode, setMode] = useState<"input" | "preview" | "completed">("input");
   const [isLoading, setIsLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
@@ -86,8 +87,19 @@ const Home: NextPage = () => {
     clear();
   };
 
+  useEffect(() => {
+    sleep(4000).then(() => {
+      setIsInitializing(false);
+    });
+  }, []);
+
   return (
-    <Stack minHeight={"100vh"} direction={"column"}>
+    <Stack minHeight={"100vh"} direction={"column"} bg="gray.800">
+      {isInitializing && (
+        <Center height="100vh">
+          <Image src="./anime.gif" objectFit={"contain"} maxW="56" alt="anime" />
+        </Center>
+      )}
       <Box position={"absolute"} right="2" top="2">
         <WalletMultiButton />
       </Box>
