@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Center,
-  Flex,
   FormControl,
   FormLabel,
   HStack,
@@ -85,6 +84,7 @@ const Home: NextPage = () => {
   };
 
   const onClickCompletedModalView = () => {
+    window.open("https://thirdweb.com/sol-devnet/A4bDc7ZLrWUXHKjF2hVg2Zp9zmfeay3k2UF2u7Wdm6Ch/", "_blank");
     clear();
   };
 
@@ -104,8 +104,18 @@ const Home: NextPage = () => {
       <Box position={"absolute"} right="2" top="2">
         <WalletMultiButton />
       </Box>
-      <Center flex={1}>
-        <Button onClick={onClickStart}>Start</Button>
+      <Center flex={1} p="4">
+        <Stack spacing="12">
+          <Stack>
+            <Text color="white" fontSize="4xl" fontWeight={"bold"} textAlign="center">
+              Rakugaki
+            </Text>
+            <Text color="white" fontSize="sm" textAlign="center">
+              Generate image with AI and mint them as NFTs on the Solana blockchain
+            </Text>
+          </Stack>
+          <Button onClick={onClickStart}>Create</Button>
+        </Stack>
         <Modal isOpen={isOpen} onClose={clear} header="RAKUGAKI">
           <Stack spacing="4">
             {mode === "input" && (
@@ -145,7 +155,7 @@ const Home: NextPage = () => {
               )}
               {mode === "completed" && (
                 <Button w="full" onClick={onClickCompletedModalView}>
-                  Close
+                  View
                 </Button>
               )}
             </HStack>
