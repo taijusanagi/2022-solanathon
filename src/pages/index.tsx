@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Center,
+  Flex,
   FormControl,
   FormLabel,
   HStack,
@@ -94,7 +95,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <Stack minHeight={"100vh"} direction={"column"} bg="gray.800">
+    <Stack minHeight={"100vh"} direction={"column"} bg="gray.800" justify={"center"}>
       {isInitializing && (
         <Center height="100vh">
           <Image src="./anime.gif" objectFit={"contain"} maxW="56" alt="anime" />
@@ -103,55 +104,53 @@ const Home: NextPage = () => {
       <Box position={"absolute"} right="2" top="2">
         <WalletMultiButton />
       </Box>
-      <Center flex={1} maxW="8xl">
-        <Box>
-          <Button onClick={onClickStart}>Start</Button>
-          <Modal isOpen={isOpen} onClose={clear} header="RAKUGAKI">
-            <Stack spacing="4">
+      <Center flex={1}>
+        <Button onClick={onClickStart}>Start</Button>
+        <Modal isOpen={isOpen} onClose={clear} header="RAKUGAKI">
+          <Stack spacing="4">
+            {mode === "input" && (
+              <FormControl>
+                <FormLabel>Input text</FormLabel>
+                <Input type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
+              </FormControl>
+            )}
+            {mode === "preview" && (
+              <Center height="400px">
+                <Image h="400" src={image} alt="image" />
+              </Center>
+            )}
+            {mode === "completed" && (
+              <Stack height={"400px"} spacing="8" px="4">
+                <Text align={"center"} fontSize="xl" fontWeight={"bold"}>
+                  Congratulations!
+                </Text>
+                <Text align={"center"} fontSize="xs">
+                  Your RAKUGAKI is converted to NFT, you can view it in 3rd party NFT viewer.
+                </Text>
+                <Center height="240px">
+                  <Image h="240" src={image} alt="image" />
+                </Center>
+              </Stack>
+            )}
+            <HStack spacing="4">
               {mode === "input" && (
-                <FormControl>
-                  <FormLabel>Input text</FormLabel>
-                  <Input type="text" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
-                </FormControl>
+                <Button w="full" onClick={onClickInputModalCreate} isLoading={isLoading}>
+                  Create
+                </Button>
               )}
               {mode === "preview" && (
-                <Center height="400px">
-                  <Image h="400" src={image} alt="image" />
-                </Center>
+                <Button w="full" onClick={onClickPreviewModalMint} isLoading={isLoading}>
+                  Mint
+                </Button>
               )}
               {mode === "completed" && (
-                <Stack height={"400px"} spacing="8" px="4">
-                  <Text align={"center"} fontSize="xl" fontWeight={"bold"}>
-                    Congratulations!
-                  </Text>
-                  <Text align={"center"} fontSize="xs">
-                    Your RAKUGAKI is converted to NFT, you can view it in 3rd party NFT viewer.
-                  </Text>
-                  <Center height="240px">
-                    <Image h="240" src={image} alt="image" />
-                  </Center>
-                </Stack>
+                <Button w="full" onClick={onClickCompletedModalView}>
+                  Close
+                </Button>
               )}
-              <HStack spacing="4">
-                {mode === "input" && (
-                  <Button w="full" onClick={onClickInputModalCreate} isLoading={isLoading}>
-                    Create
-                  </Button>
-                )}
-                {mode === "preview" && (
-                  <Button w="full" onClick={onClickPreviewModalMint} isLoading={isLoading}>
-                    Mint
-                  </Button>
-                )}
-                {mode === "completed" && (
-                  <Button w="full" onClick={onClickCompletedModalView}>
-                    Close
-                  </Button>
-                )}
-              </HStack>
-            </Stack>
-          </Modal>
-        </Box>
+            </HStack>
+          </Stack>
+        </Modal>
       </Center>
     </Stack>
   );
